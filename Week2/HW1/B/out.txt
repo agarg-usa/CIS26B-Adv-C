@@ -1,0 +1,15 @@
+1 De Anza College; 1967 24781
+2 Orange Coast College; 1947 25000
+3 Santa Barbara City College; 1909 30687
+4 Diablo Valley College; 1949 24781
+5 Pasadena City College; 1924 22000
+6 Foothill College; 1957 18362
+7 Napa Valley College; 1942 8996
+8 Ohlone College; 1965 18000
+9 Irvine Valley College; 1985 14384
+10 Cuesta College; 1963 9571
+11 Feather River Community College District; 1968 1635
+12 College of the Siskiyous; 1957 2473
+13 Lake Tahoe Community College; 1975 3000
+14 West Hills College - Coalinga; 1932 4000
+15 Palo Verde College; 1947 3898
