@@ -4,6 +4,6 @@
 
 int main(void)
 {
-	int* ptr = 10;
-	printf("%p\n", ptr);
+	char* arr = malloc(sizeof(char) * 10);
+	printf("%d\n", sizeof(arr));
 }
