@@ -3,6 +3,8 @@
 		"string.h": "c",
 		"stdio.h": "c",
 		"stdlib.h": "c",
-		"cstdio": "c"
+		"cstdio": "c",
+		"errno.h": "c",
+		"*.tcc": "c"
 	}
 }
