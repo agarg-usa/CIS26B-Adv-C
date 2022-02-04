@@ -8,8 +8,8 @@
 
    Save the output as a comment at the end of the program.
 **********************************************************
-**  Written By:
-**  IDE
+**  Written By: Aryan Garg
+**  IDE: VScode / Gcc
 ***************************************************************************/
 #include <stdio.h>
 #include <string.h>
