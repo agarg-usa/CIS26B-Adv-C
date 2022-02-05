@@ -5,6 +5,11 @@
 		"stdlib.h": "c",
 		"cstdio": "c",
 		"errno.h": "c",
-		"*.tcc": "c"
-	}
+		"*.tcc": "c",
+		"cstdlib": "c",
+		"linked_list.h": "c",
+		"stack.h": "c",
+		"typeinfo": "c"
+	},
+	"cSpell.words": ["pnew"]
 }
