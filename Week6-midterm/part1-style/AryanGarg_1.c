@@ -80,3 +80,13 @@ int countUpper(char password[])
 }
 
 
+/*
+Sample Output
+
+
+10 20 sum = 0
+10 -5 sum = 0
+-5 11 sum = 11
+aBc12345@_bbAAA has 4 capital letters
+
+*/
