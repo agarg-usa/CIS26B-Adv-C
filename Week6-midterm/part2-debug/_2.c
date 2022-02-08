@@ -1,12 +1,12 @@
 /*
  Task 2: Debugging
-  
+
   There are a number of errors in the following program.
   All errors are located in main() and structure definitions.
   Function declarations and definitions are correct!
   Locate all errors, fix them (as shown below), run the program and save its output
   as a comment at the end of the source file.
-  
+
   Example:
      int num = 10;
      int *ptr;
@@ -30,7 +30,7 @@
 
 typedef struct
 {
-    char  id[4];
+    char  id[5]; //error#1 this should be a length of 5 for the \0 character
     int   quizzes[10];
 } CIS_STU;
 
@@ -39,7 +39,8 @@ typedef struct node NODE;
 struct node
 {
     CIS_STU   data;
-    node *next;
+    // node *next; // ERROR #2, node is not a valid data type, struct node is though
+	struct node *next;
 };
 
 // Doubly Linked List Node
@@ -47,8 +48,10 @@ typedef struct d_node D_NODE;
 struct d_node
 {
     CIS_STU data;
-    NODE *forw;
-    NODE *back;
+    // NODE *forw; //ERROR #3, the next node should be of type D_NODE not NODE
+    // NODE *back;
+	struct d_node *forw;
+	struct d_node *back;
 };
 
 // Stack Functions
@@ -82,27 +85,33 @@ int main (void)
         {"1237", {5, 10, 9, 10, 8, 9, 9, 10, 9, 8}},
         {"1238", {10, 9, 10, 8, 9, 9, 10, 5, 9, 8}},
     };
-    
+
     NODE *stack = NULL;
     NODE *top = NULL;
     NODE *queue = NULL, *rear = NULL;
     NODE *front;
     D_NODE *list;
-    
+
     list = init_list();
     // build stack and queue with data from an array of CIS_STU structures
     srand((unsigned int)time(NULL));
+
     int count = rand() % 9;
+
     for ( int n = 0; n < count; n++)
     {
-        int i = rand() % NUM_STU + 1;
-        int duplicate = insert(list, &clsList[i]);
+        // int i = rand() % NUM_STU + 1; // Error #4 this will make the index go out of bounds
+		int i = rand() % NUM_STU;
+
+        int duplicate = insert(list, &(clsList[i]) );
         if(duplicate)
         {
-             // already in the list!
-             push(stack, &clsList[i]);
-             enqueue(&queue, &rear, clsList[i]);
-             
+            // already in the list!
+            //push(stack, clsList[i]); error #5, you need to reassign stack to the return value of push and clsList needs to be a pointer
+			stack = push(stack, &(clsList[i]));
+            //  enqueue(&queue, &rear, clsList[i]); ERROR #6 - clsList needs to be a pointer
+			enqueue(&queue, &rear, &(clsList[i]));
+
          }
     }
     // display list
@@ -110,35 +119,42 @@ int main (void)
     traverse_forw(list);
     printf("\nLIST contents (backwards):\n");
     traverse_back(list);
-    
+
     // display stack
-    if (top)
+    // if (top) error #7, top is just for traversing. Stack is a pointer to a node
+	if(stack)
     {
         printf("\nSTACK contents from top to bottom:\n");
-        while ((top = pop( stack)))
+        // while ((top = pop(stack))) error #8, pop takes in a pointer to a pointer, stack is just a pointer
+		while((top = pop(&stack)))
         {
-            printClass(top->data);
-            free(stack);
+            // printClass(top->data); error#9 we need to pass in the pointer of data
+			printClass(&top->data);
+            // free(stack); error #10 this should be free(top)
+			free(top);
         }
     }
     else
         printf ("Empty Stack!\n");
-        
+
 
     // display queue
-    if (front)
+    // if (front) Error#11 same error as above, front is just for traversing, Queue is the actual node
+	if(queue)
     {
         printf("\nQUEUE contents from front to rear:\n");
-        while ((front = dequeue( queue,  rear)))
+        // while ((front = dequeue( queue,  rear))) error #12, dequeue takes in a pointer to a pointer
+		while ((front = dequeue(&queue, &rear)))
         {
-            printClass(front->data);
-            // Error #9
-            free(queue);
+            // printClass(front->data); Error #13: we need to pass in the pointer of data
+			printClass(&front->data);
+            // free(queue); error #14 this should be free(front)
+			free(front);
         }
     }
     else
         printf ("Empty Queue!\n");
-    
+
     return 0;
 }
 /***************************************************
@@ -159,7 +175,7 @@ void printClass(const CIS_STU *pCls)
 NODE *push(NODE *stack, const CIS_STU *pCls)
 {
     NODE *pnew;
-    
+
     pnew = (NODE *) malloc(sizeof (NODE));
     if (!pnew)
     {
@@ -169,7 +185,7 @@ NODE *push(NODE *stack, const CIS_STU *pCls)
     pnew->data = *pCls;
     pnew->next = stack;
     stack = pnew;
-    
+
     return stack;
 }
 
@@ -179,12 +195,12 @@ NODE *push(NODE *stack, const CIS_STU *pCls)
 NODE *pop(NODE **stack)
 {
     NODE *first;
-    
+
     if (*stack == NULL) return NULL;
     first = *stack;
     *stack = (*stack)->next;
     first->next = NULL;
-    
+
     return first;
 }
 
@@ -196,7 +212,7 @@ NODE *pop(NODE **stack)
 void enqueue(NODE **queue, NODE **rear, const CIS_STU *pCls)
 {
     NODE *pnew;
-    
+
     pnew = (NODE *) malloc(sizeof (NODE));
     if (!pnew)
     {
@@ -217,13 +233,13 @@ void enqueue(NODE **queue, NODE **rear, const CIS_STU *pCls)
 NODE *dequeue(NODE **queue, NODE **rear)
 {
     NODE *first;
-    
+
     if (*queue == NULL) return NULL;
     first = *queue;
     *queue = (*queue)->next;
     if (*queue == NULL) *rear = NULL;
     first->next = NULL;
-    
+
     return first;
 }
 

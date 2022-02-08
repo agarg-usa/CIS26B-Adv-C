@@ -139,3 +139,46 @@ void searchLoop(LIST_NODE* head)
 		printf("Enter a state/city name (type \"quit\" to quit): ");
 	}
 }
+
+/*
+
+Sample Output:
+
+Enter input file (0 for default): 0
+DISPLAYING LIST (ASCENDING)
+Arizona,Flagstaff: 84
+Arizona,Phoenix: 107
+Arizona,Tucson: 109
+California,Cupertino: 88
+California,Los Angeles: 97
+California,San Francisco: 82
+California,Yreka: 100
+Nevada,Reno: 108
+Oregon,Portland: 79
+Oregon,Salem: 85
+Pennsylvania,Philadelphia: 86
+Pennsylvania,Pittsburgh: 89
+
+DISPLAYING LIST (DESCENDING)
+Pennsylvania,Pittsburgh: 89
+Pennsylvania,Philadelphia: 86
+Oregon,Salem: 85
+Oregon,Portland: 79
+Nevada,Reno: 108
+California,Yreka: 100
+California,San Francisco: 82
+California,Los Angeles: 97
+California,Cupertino: 88
+Arizona,Tucson: 109
+Arizona,Phoenix: 107
+Arizona,Flagstaff: 84
+Enter a state/city name (type "quit" to quit): asdf
+asdf not found.
+Enter a state/city name (type "quit" to quit): California,Los Angeles
+California,Los Angeles: 97°
+Average Temperature: 84.50°
+Enter a state/city name (type "quit" to quit): qui
+qui not found.
+Enter a state/city name (type "quit" to quit): quit
+
+*/
