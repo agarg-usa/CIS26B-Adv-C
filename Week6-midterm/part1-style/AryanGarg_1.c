@@ -41,9 +41,9 @@ int addOdd(int a, int b)
     // if (*a % 2 == 0 && *b % 2 != 0) // only *b is odd
     //     sum = *b;
 
-	if(a % 2 == 1)
+	if(a % 2 != 0)
 		sum += a;
-	if(b % 2 == 1)
+	if(b % 2 != 0)
 		sum += b;
 
     return sum;
@@ -85,8 +85,8 @@ Sample Output
 
 
 10 20 sum = 0
-10 -5 sum = 0
--5 11 sum = 11
+10 -5 sum = -5
+-5 11 sum = 6
 aBc12345@_bbAAA has 4 capital letters
 
 */
