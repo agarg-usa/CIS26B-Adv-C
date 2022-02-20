@@ -9,7 +9,8 @@
 		"cstdlib": "c",
 		"linked_list.h": "c",
 		"stack.h": "c",
-		"typeinfo": "c"
+		"typeinfo": "c",
+		"cctype": "c"
 	},
 	"cSpell.words": ["pnew"]
 }
