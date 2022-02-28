@@ -31,4 +31,8 @@ int main(void)
 	// you can use these masks to turn off / on / toggle  bits for example
 
 	// to rotate bits you need to move the left bits and or them with the moved right bits
+
+	// and good for turning on bits
+	// or good for turning off bits
+	// xor good for toggling bits
 }
