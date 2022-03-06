@@ -10,7 +10,8 @@
 		"linked_list.h": "c",
 		"stack.h": "c",
 		"typeinfo": "c",
-		"cctype": "c"
+		"cctype": "c",
+		"limits": "c"
 	},
 	"cSpell.words": ["pnew"]
 }

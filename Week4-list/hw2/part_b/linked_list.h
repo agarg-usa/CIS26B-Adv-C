@@ -17,7 +17,7 @@ typedef struct list_node{
 /**
  * creates a senitenal node for the head of the link list
  */
-LIST_NODE *init_list(void);
+LIST_NODE *list_init(void);
 /**
  * Inserts a node into the list
  * returns 1 if it added, 0 if it found the node already in the list

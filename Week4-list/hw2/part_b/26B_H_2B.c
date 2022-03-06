@@ -44,7 +44,7 @@ void searchLoop(LIST_NODE *);
 
 int main( void )
 {
-	LIST_NODE *head = init_list();
+	LIST_NODE *head = list_init();
 	readFile(head);
 	traverseList(head);
 	searchLoop(head);

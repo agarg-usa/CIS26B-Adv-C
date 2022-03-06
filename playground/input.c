@@ -4,19 +4,11 @@
 
 int main(void)
 {
-	char id[5];
-	char name[21];
-	int qty;
+	// char str[100];
+	// scanf("%100s", str);
+	// printf("%ld\n", strlen(str));
+	int option;
 
-	char buff[100];
-	fgets(buff, 100, stdin);
-
-	char *token = strtok(buff, ",");
-	strncpy(id, token, 5);
-
-	token = strtok(NULL, ":");
-	strncpy(name, token, 21);
-
-	token = strtok(NULL, "\n");
-	qty = atoi(token);
+	int i = scanf("%d", &option);
+	printf("%d %d\n", i, option);
 }

@@ -18,7 +18,7 @@ LIST_NODE* createNewNode()
 	return list;
 }
 
-LIST_NODE *init_list(void)
+LIST_NODE *list_init(void)
 {
     LIST_NODE *list = createNewNode();
 
