@@ -9,10 +9,56 @@
 #define MAX_INPUT_SIZE 100
 #define FLUSH while (getchar() != '\n')
 
+/*
+Gets the file name from the user and reads the file into a LIST structure.
+Returns the head of the LIST structure.
+*/
 LIST_NODE *readFile();
+
+/*
+Takes in the LIST_NODE head and will build the tree from the LIST structure using
+the list_assemble() function
+*/
 void buildTree(LIST_NODE *head);
+
+/*
+Helper method that gets the user input for the different options on printing out the tree
+*/
 int getOption();
+
+/*
+prints out the binary numbers in a char
+*/
 void printBin(char data);
+
+/*
+Gets the user input for a word and prints the huffman code repersenting that word
+*/
+void printHuffmanWord(MAP_NODE *map);
+
+/*
+Gets input from the user about a list of binary numbers and decodes the numbers from the tree to
+a word
+*/
+void decodeHuffmanWord(TREE_NODE* root);
+
+/*
+Gets the file name from the user and then encodes the file using the huffman tree
+
+The file format has the first byte as the padding added at the end of the file, as to make sure
+we fill up all 8 bits in the last byte.
+*/
+void encodeFile(MAP_NODE* map);
+
+/*
+Takes in a file encoded by encodeFile and decodes the file using the tree
+*/
+void decodeFile(TREE_NODE* root);
+
+/*
+Helper method that gets the corresponding bit from a char (byte)
+*/
+char getBitChar(char byte, int bit);
 
 int main(void)
 {
@@ -76,31 +122,24 @@ int main(void)
 		}
 		case '5':
 		{
-			printf("Enter a word: ");
-			char word[MAX_INPUT_SIZE];
-			scanf("%100s", word);
-			FLUSH;
-
-			printf("ASCII REPERSENETATION: ");
-			for (int i = 0; i < strlen(word); i++)
-			{
-				printBin(word[i]);
-			}
-			printf("\n");
-			printf("HUFFMAN CODE: ");
-			for (int i = 0; i < strlen(word); i++)
-			{
-				printf("%s", get_map_node(map, word[i])->bin);
-			}
-			printf("\n");
+			printHuffmanWord(map);
 			break;
 		}
 		case '6':
+		{
+			decodeHuffmanWord(root);
 			break;
+		}
 		case '7':
+		{
+			encodeFile(map);
 			break;
+		}
 		case '8':
+		{
+			decodeFile(root);
 			break;
+		}
 		case '9':
 			return 0;
 		default:
@@ -134,7 +173,7 @@ LIST_NODE *readFile()
 	char c;
 	while (fscanf(fp, "%c", &c) != EOF)
 	{
-		if (c == ASCII_START - 1 || c == ASCII_END)
+		if (c < ASCII_START || c >= ASCII_END)
 		{
 			continue; // skip NULL and DEL
 		}
@@ -192,5 +231,254 @@ void printBin(char data)
 	for (int i = 7; i >= 0; i--)
 	{
 		printf("%d", (data >> i) & 1);
+	}
+}
+
+void printHuffmanWord(MAP_NODE* map)
+{
+	printf("Enter a word: ");
+	char word[MAX_INPUT_SIZE];
+	scanf("%100s", word);
+	FLUSH;
+
+	printf("ASCII REPERSENETATION: ");
+	for (int i = 0; i < strlen(word); i++)
+	{
+		printBin(word[i]);
+	}
+	printf("\n");
+	printf("HUFFMAN CODE: ");
+	for (int i = 0; i < strlen(word); i++)
+	{
+		printf("%s", get_map_node(map, word[i])->bin);
+	}
+	printf("\n");
+}
+
+void decodeHuffmanWord(TREE_NODE* root)
+{
+	printf("Enter an encoded word in binary: ");
+	char word[MAX_INPUT_SIZE];
+	TREE_NODE *node;
+	char *strPtr = word;
+	char printableChar[3];
+	scanf("%100s", word);
+	FLUSH;
+	while (1)
+	{
+		int errCode = traverse_tree(root, strPtr, &node, &strPtr);
+		if (errCode == TREE_TRAVERSAL_ERR)
+		{
+			printf("\nERROR: Wasn't able to finish traversal of tree with given string\n");
+			break;
+		}
+
+		get_printable_char(node->data, printableChar);
+		printf("%s", printableChar);
+
+		if (errCode == TREE_TRAVERSAL_FINISHED)
+		{
+			break;
+		}
+	}
+	printf("\n");
+}
+
+void encodeFile(MAP_NODE* map)
+{
+	char filename[MAX_INPUT_SIZE];
+
+	printf("Enter the file name to encode ( 0 for default: %s ): ", DEFAULT_INPUT_FILE);
+	scanf("%100s", filename);
+	FLUSH;
+
+	if (strcmp(filename, "0") == 0)
+	{
+		strcpy(filename, DEFAULT_INPUT_FILE);
+	}
+
+	FILE *fileToEncode = fopen(filename, "r");
+	if (fileToEncode == NULL)
+	{
+		printf("Error opening file\n");
+		return;
+	}
+
+	printf("Enter the out file ( 0 for default: %s ): ", DEFAULT_OUTPUT_FILE);
+	scanf("%100s", filename);
+	FLUSH;
+
+	if (strcmp(filename, "0") == 0)
+	{
+		strcpy(filename, DEFAULT_OUTPUT_FILE);
+	}
+
+	FILE *fileOut = fopen(filename, "wb");
+	if (fileOut == NULL)
+	{
+		printf("Error opening file\n");
+		return;
+	}
+
+	char emptyByte = 0;
+	fwrite(&emptyByte, sizeof(char), 1, fileOut); // save space in the first byte
+	// we will later on use this first byte to write the amount of padding was added at the end
+
+	char c;
+	char binBuffer[9]; // 8 bits + 1 null terminator
+	binBuffer[8] = '\0';
+	int currVal = 0; // current pos in the binBuffer
+	// we will keep loading the binBuffer until it is full, then use strtol base 2 to get the value (remember to cast down to 8 bits (char))
+	while (fscanf(fileToEncode, "%c", &c) != EOF)
+	{
+		char *bin = get_map_node(map, c)->bin;
+		for (int i = 0; i < strlen(bin); i++)
+		{
+			binBuffer[currVal] = bin[i];
+			currVal++;
+			if (currVal == 8)
+			{
+				char value = (char)strtol(binBuffer, NULL, 2);
+				fwrite(&value, sizeof(char), 1, fileOut);
+				currVal = 0;
+			}
+		}
+	}
+
+	if(currVal != 0)
+	{
+		char padding = 8 - currVal;
+		// we need to pad the last byte with 0s
+		for (int i = currVal; i < 8; i++)
+		{
+			binBuffer[i] = '0';
+		}
+		char value = (char)strtol(binBuffer, NULL, 2);
+		fwrite(&value, sizeof(char), 1, fileOut);
+		fseek(fileOut, 0, SEEK_SET);
+		fwrite(&padding, sizeof(char), 1, fileOut);
+	}
+
+	printf("Successfully encoded file\n");
+
+	fclose(fileToEncode);
+	fclose(fileOut);
+}
+
+void decodeFile(TREE_NODE* root)
+{
+	char filename[MAX_INPUT_SIZE];
+
+	printf("Enter the file name to decode ( 0 for default: %s ): ", DEFAULT_INPUT_FILE);
+	scanf("%100s", filename);
+	FLUSH;
+
+	if (strcmp(filename, "0") == 0)
+	{
+		strcpy(filename, DEFAULT_INPUT_FILE);
+	}
+
+	FILE *encodedFile = fopen(filename, "rb");
+	if (encodedFile == NULL)
+	{
+		printf("Error opening file\n");
+		return;
+	}
+
+	printf("Enter the out file ( 0 for default: %s ): ", DEFAULT_OUTPUT_FILE);
+	scanf("%100s", filename);
+	FLUSH;
+
+	if (strcmp(filename, "0") == 0)
+	{
+		strcpy(filename, DEFAULT_OUTPUT_FILE);
+	}
+
+	FILE *fileOut = fopen(filename, "w");
+	if (fileOut == NULL)
+	{
+		printf("Error opening file\n");
+		return;
+	}
+
+	char padding;
+	fread(&padding, sizeof(char), 1, encodedFile);
+
+	char curr_char, next_char; //we need to read one byte ahead of the byte we are processing as to be able to check when we hit our eof
+	fread(&curr_char, sizeof(char), 1, encodedFile);
+	TREE_NODE* iter = root;
+
+	while(1)
+	{
+		if(fread(&next_char, sizeof(char), 1, encodedFile) == 0)
+		{
+			// we reached the eof, so this curr char will have padding
+			for(int i = 0; i < 8-padding ; i++)
+			{
+				if(getBitChar(curr_char, i) == '1')
+				{
+					iter = iter->right;
+				}
+				else
+				{
+					iter = iter->left;
+				}
+
+				if(iter->data != EMPTY_TREE_NODE)
+				{
+					fprintf(fileOut, "%c", iter->data);
+					iter = root;
+				}
+			}
+			break;
+		}
+		else
+		{
+			// not at eof, read as normal
+			for(int i = 0; i < 8; i++)
+			{
+				if(getBitChar(curr_char, i) == '1')
+				{
+					iter = iter->right;
+				}
+				else
+				{
+					iter = iter->left;
+				}
+
+				if(iter->data != EMPTY_TREE_NODE)
+				{
+					fprintf(fileOut, "%c", iter->data);
+					iter = root;
+				}
+			}
+			curr_char = next_char;
+		}
+	}
+
+	if(iter != root)
+	{
+		printf("ERROR: File did not fully decode.\n");
+	}
+	else
+	{
+		printf("File decoded successfully.\n");
+	}
+
+	fclose(encodedFile);
+	fclose(fileOut);
+}
+
+char getBitChar(char byte, int bit)
+{
+	bit = 7 - bit;
+
+	if( ((byte >> bit) & 1) == 1)
+	{
+		return '1';
+	}
+	else
+	{
+		return '0';
 	}
 }

@@ -169,3 +169,40 @@ void print_char_weights(MAP_NODE *map)
 	}
 }
 
+int traverse_tree(TREE_NODE *tree, char* bin, TREE_NODE** treeOut, char** binOut)
+{
+	char* strPtr = bin;
+	TREE_NODE* treePtr = tree;
+	while(1)
+	{
+		if(treePtr->data != EMPTY_TREE_NODE)
+		{
+			*treeOut = treePtr;
+			*binOut = strPtr;
+
+			if(*strPtr == '\0')
+			{
+				return TREE_TRAVERSAL_FINISHED; // finished traversing
+			}
+
+			return TREE_TRAVERSAL_FOUND; // found a node
+		}
+
+		if(*strPtr == '0')
+		{
+			treePtr = treePtr->left;
+		}
+		else if(*strPtr == '1')
+		{
+			treePtr = treePtr->right;
+		}
+		else
+		{
+			// we reached the end of the string or an invalid character
+			return TREE_TRAVERSAL_ERR;
+		}
+		strPtr++;
+	}
+
+	// return TREE_TRAVERSAL_ERR; // this shouldn't ever be reached
+}
