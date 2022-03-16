@@ -1,0 +1,276 @@
+Enter input file name ( 0 for default: in.txt ): 0
+MENU OPTIONS:
+        1. Print Character Weights
+        2. Print Tree
+        3. Print Huffman Code for All Character
+        4. Print Huffman Code for a Character
+        5. Print Huffman Code for a Word
+        6. Decode An Encoded Word
+        7. Encode File
+        8. Decode File
+        9. Exit
+1
+'\n' (DEC10): 16
+' ' (DEC32): 162
+'"' (DEC34): 2
+''' (DEC39): 2
+'(' (DEC40): 2
+')' (DEC41): 2
+',' (DEC44): 7
+'-' (DEC45): 2
+'.' (DEC46): 10
+'/' (DEC47): 5
+'1' (DEC49): 1
+'2' (DEC50): 1
+'5' (DEC53): 1
+'9' (DEC57): 1
+':' (DEC58): 2
+'A' (DEC65): 3
+'C' (DEC67): 2
+'D' (DEC68): 1
+'H' (DEC72): 8
+'I' (DEC73): 2
+'M' (DEC77): 3
+'R' (DEC82): 1
+'S' (DEC83): 1
+'T' (DEC84): 4
+'_' (DEC95): 1
+'a' (DEC97): 66
+'b' (DEC98): 18
+'c' (DEC99): 39
+'d' (DEC100): 39
+'e' (DEC101): 103
+'f' (DEC102): 37
+'g' (DEC103): 22
+'h' (DEC104): 36
+'i' (DEC105): 63
+'k' (DEC107): 2
+'l' (DEC108): 37
+'m' (DEC109): 45
+'n' (DEC110): 64
+'o' (DEC111): 81
+'p' (DEC112): 25
+'q' (DEC113): 1
+'r' (DEC114): 49
+'s' (DEC115): 60
+'t' (DEC116): 59
+'u' (DEC117): 30
+'v' (DEC118): 7
+'w' (DEC119): 11
+'x' (DEC120): 1
+'y' (DEC121): 18
+MENU OPTIONS:
+        1. Print Character Weights
+        2. Print Tree
+        3. Print Huffman Code for All Character
+        4. Print Huffman Code for a Character
+        5. Print Huffman Code for a Word
+        6. Decode An Encoded Word
+        7. Encode File
+        8. Decode File
+        9. Exit
+2
+Select an option:
+        1. Print All Characters
+        2. Print All Alpha Characters
+        3. Print All Characters with Weights
+3
+        'r' (DEC114): Weight 49
+        't' (DEC116): Weight 59
+              ',' (DEC44): Weight 7
+              'v' (DEC118): Weight 7
+                  ')' (DEC41): Weight 2
+                  '(' (DEC40): Weight 2
+                  ':' (DEC58): Weight 2
+                  ''' (DEC39): Weight 2
+                  'C' (DEC67): Weight 2
+                  'I' (DEC73): Weight 2
+                  '-' (DEC45): Weight 2
+                  '"' (DEC34): Weight 2
+          'u' (DEC117): Weight 30
+        's' (DEC115): Weight 60
+        'i' (DEC105): Weight 63
+        'n' (DEC110): Weight 64
+        'a' (DEC97): Weight 66
+                    'D' (DEC68): Weight 1
+                    'x' (DEC120): Weight 1
+                    '9' (DEC57): Weight 1
+                    '1' (DEC49): Weight 1
+                'T' (DEC84): Weight 4
+                      '_' (DEC95): Weight 1
+                    'S' (DEC83): Weight 1
+                  'k' (DEC107): Weight 2
+                    '2' (DEC50): Weight 1
+                    '5' (DEC53): Weight 1
+                    'q' (DEC113): Weight 1
+                    'R' (DEC82): Weight 1
+            '\n' (DEC10): Weight 16
+              'H' (DEC72): Weight 8
+              '.' (DEC46): Weight 10
+            'y' (DEC121): Weight 18
+          'h' (DEC104): Weight 36
+          'f' (DEC102): Weight 37
+          'l' (DEC108): Weight 37
+          'd' (DEC100): Weight 39
+          'c' (DEC99): Weight 39
+            'b' (DEC98): Weight 18
+                '/' (DEC47): Weight 5
+                  'A' (DEC65): Weight 3
+                  'M' (DEC77): Weight 3
+              'w' (DEC119): Weight 11
+        'o' (DEC111): Weight 81
+      ' ' (DEC32): Weight 162
+          'm' (DEC109): Weight 45
+            'g' (DEC103): Weight 22
+            'p' (DEC112): Weight 25
+        'e' (DEC101): Weight 103
+MENU OPTIONS:
+        1. Print Character Weights
+        2. Print Tree
+        3. Print Huffman Code for All Character
+        4. Print Huffman Code for a Character
+        5. Print Huffman Code for a Word
+        6. Decode An Encoded Word
+        7. Encode File
+        8. Decode File
+        9. Exit
+3
+Select an option:
+        1. Print All Characters
+        2. Print All Alpha Characters
+        3. Print All Characters with Weights
+2
+' ' (DEC32): 001
+'!' (DEC33): 100011011111111111111111111111111111111110
+'"' (DEC34): 110110000
+'#' (DEC35): 1000110111111111111111111111111111111111110
+'$' (DEC36): 10001101111111111111111111111111111111111110
+'%' (DEC37): 100011011111111111111111111111111111111111110
+'&' (DEC38): 1000110111111111111111111111111111111111111110
+''' (DEC39): 110110100
+'(' (DEC40): 110110110
+')' (DEC41): 110110111
+'*' (DEC42): 10001101111111111111111111111111111111111111110
+'+' (DEC43): 100011011111111111111111111111111111111111111110
+',' (DEC44): 1101111
+'-' (DEC45): 110110001
+'.' (DEC46): 1000010
+'/' (DEC47): 01010011
+'0' (DEC48): 1000110111111111111111111111111111111111111111110
+'1' (DEC49): 1000111100
+'2' (DEC50): 1000110011
+'3' (DEC51): 10001101111111111111111111111111111111111111111110
+'4' (DEC52): 100011011111111111111111111111111111111111111111110
+'5' (DEC53): 1000110010
+'6' (DEC54): 1000110111111111111111111111111111111111111111111110
+'7' (DEC55): 10001101111111111111111111111111111111111111111111110
+'8' (DEC56): 100011011111111111111111111111111111111111111111111110
+'9' (DEC57): 1000111101
+':' (DEC58): 110110101
+';' (DEC59): 1000110111111111111111111111111111111111111111111111110
+'<' (DEC60): 10001101111111111111111111111111111111111111111111111110
+'=' (DEC61): 100011011111111111111111111111111111111111111111111111110
+'>' (DEC62): 1000110111111111111111111111111111111111111111111111111110
+'?' (DEC63): 10001101111111111111111111111111111111111111111111111111110
+'@' (DEC64): 100011011111111111111111111111111111111111111111111111111110
+'A' (DEC65): 010100101
+'B' (DEC66): 1000110111111111111111111111111111111111111111111111111111110
+'C' (DEC67): 110110011
+'D' (DEC68): 1000111111
+'E' (DEC69): 10001101111111111111111111111111111111111111111111111111111110
+'F' (DEC70): 100011011111111111111111111111111111111111111111111111111111110
+'G' (DEC71): 1000110111111111111111111111111111111111111111111111111111111110
+'H' (DEC72): 1000011
+'I' (DEC73): 110110010
+'J' (DEC74): 10001101111111111111111111111111111111111111111111111111111111110
+'K' (DEC75): 100011011111111111111111111111111111111111111111111111111111111110
+'L' (DEC76): 1000110111111111111111111111111111111111111111111111111111111111110
+'M' (DEC77): 010100100
+'N' (DEC78): 10001101111111111111111111111111111111111111111111111111111111111110
+'O' (DEC79): 100011011111111111111111111111111111111111111111111111111111111111110
+'P' (DEC80): 1000110111111111111111111111111111111111111111111111111111111111111110
+'Q' (DEC81): 10001101111111111111111111111111111111111111111111111111111111111111110
+'R' (DEC82): 1000110000
+'S' (DEC83): 1000110110
+'T' (DEC84): 10001110
+'U' (DEC85): 100011011111111111111111111111111111111111111111111111111111111111111110
+'V' (DEC86): 1000110111111111111111111111111111111111111111111111111111111111111111110
+'W' (DEC87): 10001101111111111111111111111111111111111111111111111111111111111111111110
+'X' (DEC88): 100011011111111111111111111111111111111111111111111111111111111111111111110
+'Y' (DEC89): 1000110111111111111111111111111111111111111111111111111111111111111111111110
+'Z' (DEC90): 10001101111111111111111111111111111111111111111111111111111111111111111111110
+'[' (DEC91): 100011011111111111111111111111111111111111111111111111111111111111111111111110
+'\' (DEC92): 1000110111111111111111111111111111111111111111111111111111111111111111111111110
+']' (DEC93): 10001101111111111111111111111111111111111111111111111111111111111111111111111110
+'^' (DEC94): 100011011111111111111111111111111111111111111111111111111111111111111111111111110
+'_' (DEC95): 10001101110
+'`' (DEC96): 1000110111111111111111111111111111111111111111111111111111111111111111111111111110
+'a' (DEC97): 1001
+'b' (DEC98): 010101
+'c' (DEC99): 01011
+'d' (DEC100): 01100
+'e' (DEC101): 0000
+'f' (DEC102): 01110
+'g' (DEC103): 000101
+'h' (DEC104): 01111
+'i' (DEC105): 1011
+'j' (DEC106): 10001101111111111111111111111111111111111111111111111111111111111111111111111111110
+'k' (DEC107): 100011010
+'l' (DEC108): 01101
+'m' (DEC109): 00011
+'n' (DEC110): 1010
+'o' (DEC111): 0100
+'p' (DEC112): 000100
+'q' (DEC113): 1000110001
+'r' (DEC114): 1111
+'s' (DEC115): 1100
+'t' (DEC116): 1110
+'u' (DEC117): 11010
+'v' (DEC118): 1101110
+'w' (DEC119): 0101000
+'x' (DEC120): 1000111110
+'y' (DEC121): 100000
+'z' (DEC122): 100011011111111111111111111111111111111111111111111111111111111111111111111111111110
+'{' (DEC123): 1000110111111111111111111111111111111111111111111111111111111111111111111111111111110
+'|' (DEC124): 10001101111111111111111111111111111111111111111111111111111111111111111111111111111110
+'}' (DEC125): 100011011111111111111111111111111111111111111111111111111111111111111111111111111111110
+'~' (DEC126): 100011011111111111111111111111111111111111111111111111111111111111111111111111111111111
+MENU OPTIONS:
+        1. Print Character Weights
+        2. Print Tree
+        3. Print Huffman Code for All Character
+        4. Print Huffman Code for a Character
+        5. Print Huffman Code for a Word
+        6. Decode An Encoded Word
+        7. Encode File
+        8. Decode File
+        9. Exit
+7
+Enter the file name to encode ( 0 for default: in.txt ): 0
+Enter the out file ( 0 for default: out.txt ): 0
+Successfully encoded file
+MENU OPTIONS:
+        1. Print Character Weights
+        2. Print Tree
+        3. Print Huffman Code for All Character
+        4. Print Huffman Code for a Character
+        5. Print Huffman Code for a Word
+        6. Decode An Encoded Word
+        7. Encode File
+        8. Decode File
+        9. Exit
+8
+Enter the file name to decode ( 0 for default: in.txt ): out.txt
+Enter the out file ( 0 for default: out.txt ): in.txt
+File decoded successfully.
+MENU OPTIONS:
+        1. Print Character Weights
+        2. Print Tree
+        3. Print Huffman Code for All Character
+        4. Print Huffman Code for a Character
+        5. Print Huffman Code for a Word
+        6. Decode An Encoded Word
+        7. Encode File
+        8. Decode File
+        9. Exit
+9
