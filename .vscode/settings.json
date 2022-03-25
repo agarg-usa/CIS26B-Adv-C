@@ -11,7 +11,8 @@
 		"stack.h": "c",
 		"typeinfo": "c",
 		"cctype": "c",
-		"limits": "c"
+		"limits": "c",
+		"team.h": "c"
 	},
 	"cSpell.words": ["pnew"]
 }
